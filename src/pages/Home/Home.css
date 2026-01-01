@@ -22,3 +22,34 @@
     font-size: 17px;
     margin-bottom: 20px;
 }
+.hero-btns{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+.hero-btns .btn img{
+    width: 25px;
+}
+.hero-btns .btn{
+    border: 0;
+    outline: 0;
+    padding: 8px 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    background:white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.hero-btns .btn.dark-btn{
+    color: #fff;
+    background:#6d6d6eb3;
+}
+.hero-btns .btn:hover{
+    background: #ffffffbf;
+}
+.hero-btns .btn.dark-btn:hover{
+    background: #6d6d6e66;
+}
