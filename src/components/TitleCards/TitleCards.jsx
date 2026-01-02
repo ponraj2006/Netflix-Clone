@@ -3,16 +3,22 @@ import './TitleCards.css'
 import cards_data from '../../assets/cards/Cards_data'
 
 
+const TitleCards = ({title,category}) => {
+
 const cardsRef = useRef();
 
+const handleWheel =(event)=>{
+  event.preventDefault();
+  cardsRef.current.scrollLeft += event.deltaY;
+}
+
 useEffect(()=>{
-  cardsRef.current.addEventListenner('wheel',handleWheel)
+  cardsRef.current.addEventListener('wheel',handleWheel);
 },[])
 
-const TitleCards = () => {
   return (
     <div className='titlecards'>
-      <h2>Popular on Netflix</h2>
+      <h2>{title?title:"Popular on Netflix"}</h2>
       <div class="card-list" ref={cardsRef}>
         {
           cards_data.map((card,index)=>{
