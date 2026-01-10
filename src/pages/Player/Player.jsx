@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from "react";
 import "./Player.css";
 import back_arrow_icon from "../../assets/back_arrow_icon.png";
-import {useNavigate, useParams} from 'react-router-dom'
+import { useNavigate, useParams } from "react-router-dom";
+import netflix_spinner from "../../assets/netflix_spinner.gif";
 
 
 const Player = () => {
-
-  const {id} = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const [apiData,setApiData] =useState({
-    name:"",
-    key:"",
-    published_at:"",
-    typeof:""
-  })
+   const [loading,setLoading] = useState(true)
 
+  const [apiData, setApiData] = useState({
+    name: "",
+    key: "",
+    published_at: "",
+    typeof: "",
+  });
 
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTgwZGU3ZjJmODY4Y2U5M2Y1ODFlNTQyNjk1NmI4YiIsIm5iZiI6MTc2NzQxMDExMi4xMTYsInN1YiI6IjY5NTg4OWMwNDYyMDUyNzEzN2NjOGZiNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6VK0j6_nx_IWniW7vZsgblY907kS7ofKIT-NlF7tpnM",
+      Authorization:import.meta.env.VITE_API_AUTHORIZATION,
     },
   };
+
 
   useEffect(() => {
     fetch(
@@ -32,13 +33,32 @@ const Player = () => {
       options
     )
       .then((response) => response.json())
-      .then((response) => setApiData(response.results[0]))
+      .then((response) => {
+        return(
+        setApiData(response.results[0]),
+          setLoading(false)
+        )
+      })
       .catch((error) => console.error(error));
   }, []);
 
+ 
+
   return (
+     <>
+     { loading ?(
+       <div className="loading-spinner">
+                <img src={netflix_spinner} alt="" />
+              </div>):(
+    
     <div className="player">
-      <img src={back_arrow_icon} alt="" onClick={()=>{navigate(-2)}} />
+      <img
+        src={back_arrow_icon}
+        alt=""
+        onClick={() => {
+          navigate(-2);
+        }}
+      />
       <iframe
         width="90%"
         height="90%"
@@ -47,13 +67,17 @@ const Player = () => {
         frameBorder="0"
         allowFullScreen
       ></iframe>
-      <div class="player-info">
-        <p>{apiData.published_at.slice(0,10)}</p>
+      <div className="player-info">
+        <p>{apiData.published_at.slice(0, 10)}</p>
         <p>{apiData.name}</p>
         <p>{apiData.type}</p>
       </div>
     </div>
+    )
+     }
+   </>
   );
+
 };
 
 export default Player;
