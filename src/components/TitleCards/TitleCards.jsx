@@ -12,7 +12,7 @@ const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTgwZGU3ZjJmODY4Y2U5M2Y1ODFlNTQyNjk1NmI4YiIsIm5iZiI6MTc2NzQxMDExMi4xMTYsInN1YiI6IjY5NTg4OWMwNDYyMDUyNzEzN2NjOGZiNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6VK0j6_nx_IWniW7vZsgblY907kS7ofKIT-NlF7tpnM'
+    Authorization: import.meta.env.VITE_API_AUTHORIZATION,
   }
 };
 
